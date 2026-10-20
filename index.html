@@ -186,3 +186,120 @@
             padding: 10px;
             border-radius: 6px;
             background: #0f172a;
+            color: white;
+            border: 1px solid #475569;
+        }
+
+        .btn-send {
+            padding: 0 15px;
+            background: #3b82f6;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Üst Bar -->
+        <div class="top-bar">
+            <h2>Fandom Wars</h2>
+            <select class="lang-select">
+                <option value="tr">Türkçe</option>
+                <option value="en">English</option>
+            </select>
+        </div>
+
+        <!-- Oy Sayım Barı -->
+        <div class="header-card">
+            <div class="match-title">Anlık Fandom Mücadelesi</div>
+            <div class="bar-container">
+                <div class="bar-a" id="barA">Kırmızı: 50%</div>
+                <div class="bar-b" id="barB">Mavi: 50%</div>
+            </div>
+            <div class="versus-grid">
+                <div class="team-box a">
+                    <h3>Kırmızı Takım</h3>
+                    <button class="btn-heart btn-a" onclick="vote('a')">Oy Ver ❤️</button>
+                </div>
+                <div class="team-box b">
+                    <h3>Mavi Takım</h3>
+                    <button class="btn-heart btn-b" onclick="vote('b')">Oy Ver ❤️</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Piksel Alanı (Canvas) -->
+        <div class="pixel-card">
+            <h3>Pixel Sanat Alanı</h3>
+            <canvas id="pixelCanvas" width="300" height="150"></canvas>
+        </div>
+
+        <!-- Sohbet Alanı -->
+        <div class="chat-card">
+            <h3>Fandom Sohbeti</h3>
+            <div class="chat-box" id="chatBox">
+                <div class="msg team-a-msg">Kırmızı Takım: Buradayız!</div>
+                <div class="msg team-b-msg">Mavi Takım: Alacağız bu maçı!</div>
+            </div>
+            <div class="input-group">
+                <input type="text" id="msgInput" placeholder="Mesaj yaz...">
+                <button class="btn-send" onclick="sendMsg()">Gönder</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let votesA = 50;
+        let votesB = 50;
+
+        function vote(team) {
+            if(team === 'a') {
+                votesA += 2;
+                votesB -= 2;
+            } else {
+                votesB += 2;
+                votesA -= 2;
+            }
+            if(votesA > 98) votesA = 98;
+            if(votesA < 2) votesA = 2;
+            votesB = 100 - votesA;
+
+            document.getElementById('barA').style.width = votesA + '%';
+            document.getElementById('barA').innerText = 'Kırmızı: ' + votesA + '%';
+            document.getElementById('barB').style.width = votesB + '%';
+            document.getElementById('barB').innerText = 'Mavi: ' + votesB + '%';
+        }
+
+        function sendMsg() {
+            let input = document.getElementById('msgInput');
+            if(input.value.trim() === '') return;
+            let chatBox = document.getElementById('chatBox');
+            let newMsg = document.createElement('div');
+            newMsg.className = 'msg';
+            newMsg.innerText = input.value;
+            chatBox.appendChild(newMsg);
+            input.value = '';
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        // Basit Canvas Çizim Mantığı
+        const canvas = document.getElementById('pixelCanvas');
+        const ctx = canvas.getContext('2d');
+        ctx.fillStyle = '#f8fafc';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        canvas.addEventListener('click', (e) => {
+            const rect = canvas.getBoundingClientRect();
+            const x = Math.floor((e.clientX - rect.left) / 10) * 10;
+            const y = Math.floor((e.clientY - rect.top) / 10) * 10;
+            ctx.fillStyle = '#ef4444';
+            ctx.fillRect(x, y, 10, 10);
+        });
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fandom Wars & Pixel Arena</title>
+    <style>
+        :root {
+            --team-a: #ef4444;
+            --team-b: #3b82f6;
+            --bg-dark: #0f172a;
+            --card-bg: #1e293b;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-dark);
+            color: #f8fafc;
+            margin: 0;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        /* Dil Seçici Üst Bar */
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .lang-select {
+            padding: 6px 10px;
+            border-radius: 6px;
+            background: #334155;
+            color: white;
+            border: 1px solid #475569;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .header-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .match-title {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #94a3b8;
+            margin-bottom: 10px;
+        }
+
+        .bar-container {
+            height: 25px;
+            background: #334155;
+            border-radius: 12px;
+            overflow: hidden;
+            display: flex;
+            margin: 10px 0;
+        }
+
+        .bar-a {
+            background: var(--team-a);
+            width: 50%;
+            transition: width 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            padding-left: 10px;
+            font-weight: bold;
+        }
+
+        .bar-b {
+            background: var(--team-b);
+            width: 50%;
+            transition: width 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 10px;
+            font-weight: bold;
+        }
+
+        .versus-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .team-box {
+            background: rgba(255,255,255,0.05);
+            border-radius: 8px;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .team-box.a { border: 2px solid var(--team-a); }
+        .team-box.b { border: 2px solid var(--team-b); }
+
+        .btn-heart {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 5px;
+            font-size: 0.9rem;
+            transition: transform 0.1s;
+        }
+
+        .btn-heart:active { transform: scale(0.95); }
+        .btn-a { background: var(--team-a); color: white; }
+        .btn-b { background: var(--team-b); color: white; }
+
+        .pixel-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+        }
+
+        canvas {
+            background: #ffffff;
+            border-radius: 6px;
+            cursor: crosshair;
+            touch-action: none;
+            max-width: 100%;
+        }
+
+        .chat-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 15px;
+        }
+
+        .chat-box {
+            height: 150px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 10px;
+            padding-right: 5px;
+        }
+
+        .msg {
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            background: #334155;
+        }
+
+        .msg.team-a-msg { border-left: 4px solid var(--team-a); }
+        .msg.team-b-msg { border-left: 4px solid var(--team-b); }
+
+        .input-group {
+            display: flex;
+            gap: 5px;
+        }
+
+        input[type="text"] {
+            flex: 1;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #475569;
+            background: #0f172a;
+            color: white;
+        }
+
+        select {
+            padding: 10px;
+            border-radius: 6px;
+            background: #0f172a;
+
+      <!DOCTYPE html>...
